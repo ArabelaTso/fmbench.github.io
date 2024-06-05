@@ -97,11 +97,9 @@
       id="content"
       class="container-fluid d-flex flex-column align-items-center gap-3"
     >
-      <h1 class="text-nowrap mt-5">🏆 EvalPlus Leaderboard 🏆</h1>
+      <h1 class="text-nowrap mt-5">🎯 FM-Bench Leaderboard </h1>
       <h3 class="fw-light text-nowrap">
-        <small id="warning"
-          >EvalPlus evaluates AI Coders with rigorous tests.<br
-        /></small>
+        <small id="warning">FM-Bench evaluates AI Coders with rigorous tests.<br/></small>
       </h3>
       <div class="d-flex flex-row justify-content-center gap-3">
         <a href="https://github.com/evalplus/evalplus"
@@ -276,7 +274,7 @@
       const dataUrl = "results.json";
 
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "results.json", false); // false makes the request synchronous
+      xhr.open("GET", '/results.json', false); // false makes the request synchronous
       xhr.send();
 
       const calcAverage = (a, b) => {
@@ -299,7 +297,7 @@
         "average+": ...,
       }
     */
-      if (xhr.status === 200) {
+      if (xhr.status >= 200 & xhr.status < 300) {
         data = JSON.parse(xhr.responseText);
         Object.keys(data).forEach((key) => {
           data[key]["pass@1"]["average"] = calcAverage(
@@ -319,7 +317,7 @@
         });
       } else {
         // pop up error window
-        alert("Failed to load data from results.json");
+        alert("Failed to load data from results.json" );
       }
       const globalData = data;
 
